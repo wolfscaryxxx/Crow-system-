@@ -3,361 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CROW SYSTEM</title>
+    <title>Crow System</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
-        
+        /* إعدادات ألوان النيون الفخمة والهادئة (Luxury Dark) */
+        :root {
+            --bg-color: #0a0a0c;       /* خلفية سوداء داكنة جداً ومريحة للعين */
+            --card-bg: #111116;        /* خلفية الصناديق */
+            --neon-color: #ff2a3b;     /* لون النيون الأساسي - أحمر كرمزي فخم */
+            --neon-glow: rgba(255, 42, 59, 0.25); /* توهج ناعم جداً غير مزعج */
+            --text-color: #f1f5f9;     /* لون النصوص الأساسية */
+            --text-muted: #94a3b8;    /* لون النصوص الثانوية */
+            --border-color: rgba(255, 42, 59, 0.15);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
-            user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body, html {
-            height: 100%;
-            background-color: #000;
-            overflow: hidden;
-            color: #fff;
-        }
-
-        /* الشاشة الافتتاحية */
-        #landing-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, #1a0000 0%, #000000 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .neon-title {
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: #000;
-            text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 
-                -1px -1px 0 #ff0000,  
-                 1px -1px 0 #ff0000,
-                -1px  1px 0 #ff0000,
-                 1px  1px 0 #ff0000,
-                 0 0 10px #ff0000,
-                 0 0 20px #ff0000,
-                 0 0 30px #ff0000;
-            animation: textPulse 2s infinite alternate;
-            letter-spacing: 2px;
-        }
-
-        @keyframes textPulse {
-            0% { text-shadow: -1px -1px 0 #ff0000, 1px -1px 0 #ff0000, -1px 1px 0 #ff0000, 1px 1px 0 #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000; }
-            100% { text-shadow: -1px -1px 0 #ff0000, 1px -1px 0 #ff0000, -1px 1px 0 #ff0000, 1px 1px 0 #ff0000, 0 0 15px #ff3333, 0 0 30px #ff3333, 0 0 50px #ff3333, 0 0 70px #ff3333; }
-        }
-
-        .start-btn {
-            background-color: transparent;
-            color: #fff;
-            border: 3px solid #00ff00;
-            padding: 15px 60px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 0 15px #00ff00, inset 0 0 10px #00ff00;
-            text-shadow: 0 0 5px #fff;
-            animation: btnPulse 1.5s infinite alternate;
-            transition: all 0.3s ease;
-        }
-
-        .start-btn:hover {
-            background-color: #00ff00;
-            color: #000;
-            box-shadow: 0 0 30px #00ff00, inset 0 0 20px #00ff00;
-            text-shadow: none;
-        }
-
-        @keyframes btnPulse {
-            0% { box-shadow: 0 0 10px #00ff00, inset 0 0 5px #00ff00; }
-            100% { box-shadow: 0 0 25px #00ff00, inset 0 0 15px #00ff00; }
-        }
-
-        /* لوحة التحكم الرئيسية */
-        #main-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* هنا تم وضع اسم صورتك الكبيرة الجديدة بالظبط */
-            background: url('Untitled1246_20260608140438.png') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease, visibility 0.8s;
-            z-index: 1;
-        }
-
-        #main-screen::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 2;
-        }
-
-        .container {
-            position: relative;
-            z-index: 3;
-            width: 90%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .menu-btn {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid #00ff00;
-            border-radius: 12px;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             padding: 20px;
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 12px #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .menu-btn:hover {
-            background: rgba(0, 255, 0, 0.15);
-            box-shadow: 0 0 25px #00ff00, inset 0 0 15px rgba(0, 255, 0, 0.4);
+        /* الحاوية الرئيسية لضبط المقاسات على الموبايل */
+        .container {
+            width: 100%;
+            max-width: 550px;
+            margin-top: 50px;
+        }
+
+        /* الشعار والHeader العلوي */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* توهج كرمزي خفيف واحترافي */
+            text-shadow: 0 0 12px var(--neon-glow), 0 0 25px var(--neon-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* الصناديق أو البطاقات التوضيحية */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* تأثير التمرير السلس على الصندوق */
+        .card:hover {
+            border-color: var(--neon-color);
+            box-shadow: 0 0 20px var(--neon-glow);
             transform: translateY(-3px);
         }
 
-        /* نافذة عرض الأوامر المنبثقة */
-        .content-window {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            width: 90%;
-            max-width: 850px;
-            max-height: 80vh;
-            background: rgba(10, 0, 0, 0.95);
-            border: 3px solid #ff0000;
-            box-shadow: 0 0 30px #ff0000, inset 0 0 20px rgba(255, 0, 0, 0.3);
-            border-radius: 16px;
-            z-index: 10;
-            padding: 30px;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .content-window.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: transparent;
-            border: 2px solid #ff0000;
-            color: #ff0000;
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-            transition: all 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #ff0000;
-            color: #000;
-            box-shadow: 0 0 20px #ff0000;
-        }
-
-        .window-title {
-            font-size: 2rem;
+        .card h2 {
+            font-size: 1.25rem;
             color: #fff;
-            text-align: center;
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px #ff0000;
-            border-bottom: 2px dashed #ff0000;
-            padding-bottom: 10px;
-        }
-
-        .command-block {
-            background: rgba(0, 0, 0, 0.7);
-            border-right: 4px solid #00ff00;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px 12px 12px 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .command-name {
-            font-size: 1.3rem;
-            color: #00ff00;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
         }
 
-        .command-desc {
-            font-size: 1.05rem;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        .command-usage {
-            margin-top: 8px;
+        .card p {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            background: rgba(255, 0, 0, 0.1);
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            color: #ff9999;
-            font-family: monospace;
+        }
+
+        /* الأزرار الاحترافية بنظام النيون المودرن */
+        .neon-btn {
             display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 14px;
+            margin-top: 15px;
+            background: transparent;
+            color: var(--neon-color);
+            border: 2px solid var(--neon-color);
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 10px var(--neon-glow);
+            transition: all 0.3s ease;
         }
 
-        .separator-img {
-            display: block;
-            max-width: 150px;
-            height: auto;
-            margin: 25px auto;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 5px #ff0000);
+        .neon-btn:hover {
+            background-color: var(--neon-color);
+            color: #fff;
+            box-shadow: 0 0 15px var(--neon-color), 0 0 30px var(--neon-glow);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050000; }
-        ::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 4px; box-shadow: 0 0 8px #ff0000; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff3333; }
+        /* الفوتر الأسفل */
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 25px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
-    <div id="landing-screen">
-        <h1 class="neon-title">#~ CROW SYSTEM</h1>
-        <button class="start-btn" onclick="enterSystem()">ابدأ</button>
-    </div>
+    <div class="container">
+        <!-- قسم الهيدر الرئيسي -->
+        <header>
+            <h1>Crow System</h1>
+            <p>النظام الذكي المتكامل لإدارة وحماية سيرفرك</p>
+        </header>
 
-    <div id="main-screen">
-        <div class="container">
-            <button class="menu-btn" onclick="openWindow('commands-window')">شرح مفصل لأوامر البوت 📜</button>
-            <button class="menu-btn" onclick="window.open('https://discord.gg/crow1', '_blank')">سيرفر الدعم الفني 🛡️</button>
-            <button class="menu-btn" onclick="window.open('https://discord.gg/sJSEHWvurW', '_blank')">رابط سيرفر الدعم الاحتياطي 🔗</button>
+        <!-- صندوق الميزات أو الوصف -->
+        <div class="card">
+            <h2>🦅 حماية متطورة</h2>
+            <p>يوفر نظام كرو أدوات تحكم ذكية وسريعة مبنية بالكامل لتأمين خوادمك بأعلى كفاءة، وتوفير بيئة إدارة مريحة وفخمة لا مثيل لها.</p>
+        </div>
+
+        <!-- صندوق الأزرار والروابط -->
+        <div class="card">
+            <h2>لوحة التحكم</h2>
+            <p>اضغط على الزر بالأسفل للانتقال مباشرة إلى واجهة التحكم واستكشاف أدوات النظام الكرمزي.</p>
+            <a href="#" class="neon-btn">دخول النظام</a>
         </div>
     </div>
 
-    <div id="commands-window" class="content-window">
-        <button class="close-btn" onclick="closeWindow('commands-window')">إغلاق ✕</button>
-        <h2 class="window-title">الشرح المفصل والشامل لأوامر نظام CROW</h2>
-        
-        <div style="padding: 10px 0;">
-            
-            <h3 style="color: #ff0000; margin-bottom: 15px; text-shadow: 0 0 5px #ff0000; font-size: 1.4rem;">🛡️ أولاً: نظام الحماية والـ Anti-Spam</h3>
-            <div class="command-block">
-                <div class="command-name">/anti-spam</div>
-                <div class="command-desc">تفعيل وضبط نظام الحماية التلقائي ضد السبام لحماية الشات من التخريب بشكل دائم ومستقل.</div>
-                <div class="command-usage">خيارات الأمر: عدد_الحروف | عدد_الايموجي | سطر_الكلام | العقاب | snipe | وقت_التايم</div>
-            </div>
-            <div class="command-block">
-                <div class="command-name">+snipe</div>
-                <div class="command-desc">عرض آخر رسالة سبام ممسوحة وتم تطهيرها بواسطة نظام الحماية التلقائي.</div>
-                <div class="command-usage">الاستخدام: +snipe [رقم الرسالة اختياري]</div>
-            </div>
+    <!-- فوتر الحقوق -->
+    <footer>
+        <p>&copy; 2026 Crow System. جميع الحقوق محفوظة.</p>
+    </footer>
 
-            <!-- هنا تم وضع اسم صورتك الفاصلة الجديدة بالظبط -->
-            <img src="3_20260614211139.png" alt="Separator" class="separator-img">
-
-            <h3 style="color: #ff0000; margin-bottom: 15px; text-shadow: 0 0 5px #ff0000; font-size: 1.4rem;">⛓️ ثانياً: نظام السجن الشامل (Jail System)</h3>
-            <div class="command-block">
-                <div class="command-name">/اعداد-سجن</div>
-                <div class="command-desc">التهيئة والإعداد المتكامل لنظام السجن، لتحديد رتب الإدارة، روم اللوج، وتعيين رتبة المسجون الأساسية.</div>
-            </div>
-            <div class="command-block">
-                <div class="command-name">+سجن</div>
-                <div class="command-desc">سجن عضو مخالف وتجريده تلقائياً من كافة رتبه الحالية وحفظها بالملفات.</div>
-                <div class="command-usage">الاستخدام: +سجن @منشن [السبب]</div>
-            </div>
-            <div class="command-block">
-                <div class="command-name">+افراج</div>
-                <div class="command-desc">فك السجن عن العضو وإلغاء عقوبته مع استعادة كافة رتبه السابقة تلقائياً.</div>
-                <div class="command-usage">الاستخدام: +افراج @منشن</div>
-            </div>
-
-            <img src="3_20260614211139.png" alt="Separator" class="separator-img">
-
-            <h3 style="color: #ff0000; margin-bottom: 15px; text-shadow: 0 0 5px #ff0000; font-size: 1.4rem;">⛱️ ثالثاً: نظام الإجازات والفصل للأطقم الإدارية</h3>
-            <div class="command-block">
-                <div class="command-name">/اعداد_اجازه</div>
-                <div class="command-desc">إعداد وتخصيص نظام الإجازات الرسمي، تحديد البريفكس، وروم اللوج.</div>
-            </div>
-            <div class="command-block">
-                <div class="command-name">+اجازه</div>
-                <div class="command-desc">منح إجازة مؤقتة لإداري مع إزالة رتبه الإدارية لحمايتها وإعطائه رتبة الإجازة.</div>
-                <div class="command-usage">الاستخدام: +اجازه @منشن [المدة] [السبب]</div>
-            </div>
-
-            <img src="3_20260614211139.png" alt="Separator" class="separator-img">
-
-            <h3 style="color: #ff0000; margin-bottom: 15px; text-shadow: 0 0 5px #ff0000; font-size: 1.4rem;">📢 رابعاً: نظام التشهير والردود التلقائية والإرسال</h3>
-            <div class="command-block">
-                <div class="command-name">/اعداد-تشهير</div>
-                <div class="command-desc">لوحة التخصيص والتحكم الكاملة لنظام التشهير بالنصابين والمخربين.</div>
-            </div>
-            <div class="command-block">
-                <div class="command-name">/say2</div>
-                <div class="command-desc">إرسال رسالة منسقة بالكامل (Embed) متطورة مع إمكانية تحديد العنوان، الوصف، واللون النيوني.</div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        function enterSystem() {
-            const landing = document.getElementById('landing-screen');
-            const main = document.getElementById('main-screen');
-            landing.style.opacity = '0';
-            landing.style.visibility = 'hidden';
-            main.style.display = 'flex';
-            setTimeout(() => {
-                main.style.opacity = '1';
-                main.style.visibility = 'visible';
-            }, 50);
-        }
-        function openWindow(id) { document.getElementById(id).classList.add('active'); }
-        function closeWindow(id) { document.getElementById(id).classList.remove('active'); }
-    </script>
 </body>
 </html>
-
