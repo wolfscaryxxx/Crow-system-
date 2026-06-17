@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#~ CROW SYSTEM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Changa:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap');
+        :root {
+            --bg-deep: #050505;
+            --bg-surface: #0a0a0a;
+            --bg-card: rgba(10, 10, 10, 0.65);
+            --border-subtle: rgba(255, 23, 68, 0.12);
+            --border-glow: rgba(255, 23, 68, 0.3);
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #777777;
+            --crimson: #ff1744;
+            --crimson-dark: #b2102f;
+            --crimson-glow: rgba(255, 23, 68, 0.25);
+            --crimson-glow-strong: rgba(255, 23, 68, 0.5);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1.2);
+        }
 
         * {
             margin: 0;
@@ -13,36 +31,80 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --neon-red: #ff1a1a;
-            --neon-green: #00ff41;
-            --dark-bg: #060606;
-            --card-bg: rgba(10, 10, 10, 0.9);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
-
         body {
-            font-family: 'Cairo', 'Readex Pro', sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Cairo', 'Changa', sans-serif;
+            background: var(--bg-deep);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        /* ========== المؤثرات العامة ========== */
-        .noise-overlay {
+        /* ========== خلفية متحركة ========== */
+        .bg-layout {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 0;
             pointer-events: none;
-            z-index: 999;
-            opacity: 0.02;
-            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="1"/></svg>');
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            animation: orbDrift 25s ease-in-out infinite;
+        }
+
+        .bg-orb:nth-child(1) {
+            width: 45vw;
+            height: 45vw;
+            max-width: 600px;
+            max-height: 600px;
+            background: rgba(255, 23, 68, 0.06);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .bg-orb:nth-child(2) {
+            width: 35vw;
+            height: 35vw;
+            max-width: 450px;
+            max-height: 450px;
+            background: rgba(255, 23, 68, 0.04);
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -12s;
+        }
+
+        @keyframes orbDrift {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -40px) scale(1.15);
+            }
+            66% {
+                transform: translate(-25px, 20px) scale(0.9);
+            }
+        }
+
+        /* شبكة خلفية */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 55px 55px;
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* ========== الصفحة الرئيسية ========== */
@@ -52,591 +114,682 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: radial-gradient(ellipse at 50% 40%, #1a0000 0%, #0a0000 30%, #000000 70%);
             position: relative;
-            overflow: hidden;
-        }
-
-        /* خطوط الشبكة الحديثة */
-        .grid-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 0, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0;
-        }
-
-        /* تأثير الضوء الأحمر */
-        .glow-orb {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            animation: orbPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes orbPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-        }
-
-        /* الحاوية الرئيسية */
-        .title-container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
+            z-index: 1;
             padding: 20px;
         }
 
-        .hash-symbol {
-            display: inline-block;
-            font-size: clamp(60px, 10vw, 110px);
+        .title-block {
+            text-align: center;
+            position: relative;
+        }
+
+        .title-hash {
+            font-size: clamp(45px, 8vw, 95px);
             font-weight: 900;
-            color: transparent;
-            background: linear-gradient(180deg, #ff0000 0%, #ff4444 50%, #cc0000 100%);
+            letter-spacing: 6px;
+            background: linear-gradient(180deg, #ff5252 0%, #ff1744 45%, #8b0000 100%);
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000);
-            animation: hashFlicker 2s infinite;
-            line-height: 1;
-            letter-spacing: 5px;
-        }
-
-        @keyframes hashFlicker {
-            0%, 100% { filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); }
-            5% { filter: drop-shadow(0 0 30px #ff0000) drop-shadow(0 0 60px #ff0000); }
-            10% { filter: drop-shadow(0 0 15px #ff0000) drop-shadow(0 0 30px #ff0000); }
-            15% { filter: drop-shadow(0 0 25px #ff0000) drop-shadow(0 0 50px #ff0000); }
-        }
-
-        .crow-text {
+            filter: drop-shadow(0 0 35px rgba(255, 23, 68, 0.5));
+            animation: crimsonPulse 3s ease-in-out infinite;
             display: inline-block;
-            font-size: clamp(50px, 8vw, 90px);
+            line-height: 1.2;
+        }
+
+        @keyframes crimsonPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 35px rgba(255, 23, 68, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 60px rgba(255, 23, 68, 0.8));
+            }
+        }
+
+        .title-crow {
+            font-size: clamp(40px, 7vw, 80px);
             font-weight: 900;
-            color: #0a0a0a;
-            -webkit-text-stroke: 2px #ff0000;
-            text-shadow: 
-                0 0 15px #ff0000,
-                0 0 30px #ff0000,
-                0 0 60px #cc0000;
-            animation: crowGlow 3s ease-in-out infinite;
-            line-height: 1;
-            letter-spacing: 12px;
-        }
-
-        @keyframes crowGlow {
-            0%, 100% { text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 60px #cc0000; }
-            50% { text-shadow: 0 0 25px #ff3333, 0 0 50px #ff0000, 0 0 80px #ff0000; }
-        }
-
-        .system-text {
+            letter-spacing: 16px;
+            color: transparent;
+            -webkit-text-stroke: 2px #ff1744;
+            text-shadow: 0 0 25px rgba(255, 23, 68, 0.6);
+            animation: strokeGlow 3.5s ease-in-out infinite;
             display: inline-block;
-            font-size: clamp(30px, 5vw, 45px);
+            line-height: 1.2;
+        }
+
+        @keyframes strokeGlow {
+            0%, 100% {
+                text-shadow: 0 0 25px rgba(255, 23, 68, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 45px rgba(255, 23, 68, 0.9), 0 0 70px rgba(255, 23, 68, 0.4);
+            }
+        }
+
+        .title-system {
+            font-size: clamp(24px, 3.5vw, 38px);
             font-weight: 700;
-            letter-spacing: 18px;
-            color: #8b0000;
-            text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
-            animation: systemFade 2s ease-in-out infinite;
+            letter-spacing: 20px;
+            color: #6d1212;
+            text-shadow: 0 0 18px rgba(255, 23, 68, 0.45);
+            display: inline-block;
+            line-height: 1.2;
         }
 
-        @keyframes systemFade {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+        .divider-line {
+            width: 90px;
+            height: 2.5px;
+            background: linear-gradient(90deg, transparent, #ff1744, transparent);
+            margin: 22px auto;
+            border-radius: 10px;
+            opacity: 0.7;
         }
 
-        /* الخطوط الزخرفية */
-        .decorative-line {
-            width: 120px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ff0000, transparent);
-            margin: 15px auto;
-            border-radius: 50%;
-            filter: blur(1px);
-        }
-
-        /* زر ابدا */
         .start-btn {
-            margin-top: 50px;
-            padding: 16px 55px;
-            font-size: 22px;
+            margin-top: 45px;
+            padding: 17px 55px;
+            font-size: 19px;
             font-weight: 700;
             font-family: 'Cairo', sans-serif;
-            background: rgba(0, 0, 0, 0.8);
+            letter-spacing: 5px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             color: #fff;
-            border: 2px solid #00ff41;
+            border: 1.5px solid var(--border-glow);
             border-radius: 50px;
             cursor: pointer;
-            letter-spacing: 6px;
-            text-shadow: 0 0 10px #00ff41;
-            box-shadow: 
-                0 0 15px rgba(0, 255, 65, 0.3),
-                0 0 30px rgba(0, 255, 65, 0.2),
-                inset 0 0 20px rgba(0, 255, 65, 0.1);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px var(--crimson-glow), 0 0 45px rgba(255, 23, 68, 0.08);
+            transition: var(--transition);
             position: relative;
-            z-index: 10;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
-        }
-
-        .start-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 65, 0.1), transparent, rgba(0, 255, 65, 0.1), transparent);
-            animation: btnSpin 3s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes btnSpin {
-            100% { transform: rotate(360deg); }
+            z-index: 1;
         }
 
         .start-btn:hover {
-            background: rgba(0, 20, 0, 0.9);
-            box-shadow: 
-                0 0 25px rgba(0, 255, 65, 0.5),
-                0 0 50px rgba(0, 255, 65, 0.3),
-                0 0 80px rgba(0, 255, 65, 0.2),
-                inset 0 0 30px rgba(0, 255, 65, 0.2);
-            transform: translateY(-3px) scale(1.03);
-            border-color: #00ff41;
+            background: rgba(20, 0, 0, 0.8);
+            box-shadow: 0 0 30px var(--crimson-glow-strong), 0 0 65px rgba(255, 23, 68, 0.2);
+            transform: translateY(-3px);
+            border-color: #ff1744;
+        }
+
+        .start-btn:active {
+            transform: scale(0.96);
         }
 
         /* ========== صفحة الأزرار ========== */
         .buttons-page {
             display: none;
             min-height: 100vh;
-            background-image: url('Untitled1246_20260608140438.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             position: relative;
+            z-index: 1;
             padding: 40px 20px;
         }
 
-        .buttons-page::after {
-            content: '';
-            position: absolute;
+        .buttons-bg-image {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.78);
+            width: 100%;
+            height: 100%;
+            background-image: url('Untitled1246_20260608140438.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .buttons-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.75);
             backdrop-filter: blur(2px);
-            z-index: 1;
+            -webkit-backdrop-filter: blur(2px);
+            z-index: -1;
         }
 
         .buttons-container {
-            position: relative;
-            z-index: 10;
+            max-width: 520px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            max-width: 550px;
-            margin: 0 auto;
-            padding-top: 30px;
+            gap: 15px;
+            padding-top: 25px;
         }
 
-        .page-subtitle {
-            color: #ccc;
-            font-size: 14px;
-            letter-spacing: 4px;
+        .page-tag {
             text-align: center;
-            margin-bottom: 10px;
-            opacity: 0.7;
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 7px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
         }
 
-        .neon-btn {
+        .nav-btn {
             width: 100%;
-            max-width: 500px;
-            padding: 18px 28px;
-            font-size: 18px;
+            padding: 19px 26px;
+            font-size: 17px;
             font-weight: 700;
             font-family: 'Cairo', sans-serif;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             color: #fff;
-            border: 1.5px solid #00ff41;
-            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
             cursor: pointer;
             text-align: center;
             letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            box-shadow: 
-                0 0 12px rgba(0, 255, 65, 0.2),
-                0 0 25px rgba(0, 255, 65, 0.1);
-            backdrop-filter: blur(5px);
-            transition: all 0.35s ease;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
 
-        .neon-btn::after {
+        .nav-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 23, 68, 0.04), transparent);
             transition: left 0.5s ease;
         }
 
-        .neon-btn:hover::after {
+        .nav-btn:hover {
+            background: rgba(20, 0, 0, 0.75);
+            border-color: var(--border-glow);
+            box-shadow: 0 0 22px var(--crimson-glow), 0 8px 28px rgba(0, 0, 0, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:hover::before {
             left: 100%;
         }
 
-        .neon-btn:hover {
-            background: rgba(0, 15, 0, 0.9);
-            box-shadow: 
-                0 0 20px rgba(0, 255, 65, 0.4),
-                0 0 40px rgba(0, 255, 65, 0.3),
-                0 0 60px rgba(0, 255, 65, 0.2);
-            transform: translateY(-2px);
-            border-color: #00ff41;
-        }
-
         .back-btn {
-            margin-top: 15px;
-            padding: 12px 35px;
-            font-size: 15px;
+            margin-top: 8px;
+            padding: 13px 32px;
+            font-size: 14px;
             font-family: 'Cairo', sans-serif;
             background: transparent;
-            color: #ff6666;
-            border: 1.5px solid #ff3333;
+            color: #ff5252;
+            border: 1px solid rgba(255, 23, 68, 0.3);
             border-radius: 50px;
             cursor: pointer;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            z-index: 10;
-            position: relative;
+            letter-spacing: 3px;
+            transition: var(--transition);
+            align-self: center;
         }
 
         .back-btn:hover {
-            background: rgba(255, 0, 0, 0.15);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
-            color: #ff8888;
+            background: rgba(255, 23, 68, 0.08);
+            border-color: #ff1744;
+            box-shadow: 0 0 20px var(--crimson-glow);
         }
 
         /* ========== صفحة الأوامر ========== */
         .commands-page {
             display: none;
             min-height: 100vh;
-            background: #080808;
             position: relative;
+            z-index: 1;
             padding: 40px 20px;
-            color: #fff;
-        }
-
-        .commands-page::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 50% 0%, #1a0000 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, #0a0000 0%, transparent 50%);
-            z-index: -1;
         }
 
         .commands-container {
-            max-width: 750px;
+            max-width: 780px;
             margin: 0 auto;
-            position: relative;
-            z-index: 10;
         }
 
         .commands-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             text-align: center;
-            background: linear-gradient(180deg, #ff4444, #ff0000);
+            letter-spacing: 3px;
+            background: linear-gradient(180deg, #ff5252, #b71c1c);
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.5));
+            filter: drop-shadow(0 0 18px rgba(255, 23, 68, 0.45));
             margin-bottom: 35px;
-            letter-spacing: 2px;
         }
 
         .command-card {
-            background: rgba(15, 15, 15, 0.85);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 25px 30px;
-            margin-bottom: 22px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            background: var(--bg-card);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px 26px;
+            margin-bottom: 17px;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .command-card:hover {
-            border-color: rgba(255, 0, 0, 0.6);
-            box-shadow: 0 8px 40px rgba(255, 0, 0, 0.15);
+            border-color: var(--border-glow);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 23, 68, 0.1);
             transform: translateY(-2px);
         }
 
-        .command-card::before {
+        /* خط النيون الجانبي للكارت */
+        .command-card::after {
             content: '';
             position: absolute;
             right: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, #ff0000, #ff4444, #ff0000);
-            border-radius: 4px 0 0 4px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            top: 15%;
+            width: 3px;
+            height: 70%;
+            background: linear-gradient(180deg, transparent, #ff1744, transparent);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 14px rgba(255, 23, 68, 0.5);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .command-card:hover::after {
+            opacity: 1;
+        }
+
+        .command-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            padding-right: 5px;
         }
 
         .command-name {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 700;
-            color: #00ff41;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-            margin-bottom: 8px;
-            padding-right: 10px;
+            color: #ff5252;
+            text-shadow: 0 0 8px rgba(255, 23, 68, 0.3);
+        }
+
+        .command-badge {
+            font-size: 9px;
+            padding: 4px 9px;
+            border-radius: 20px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .badge-slash {
+            background: rgba(255, 23, 68, 0.12);
+            color: #ff5252;
+            border: 1px solid rgba(255, 23, 68, 0.25);
+        }
+
+        .badge-prefix {
+            background: rgba(255, 82, 82, 0.08);
+            color: #ff8a80;
+            border: 1px solid rgba(255, 82, 82, 0.2);
         }
 
         .command-desc {
-            font-size: 15px;
-            color: #c0c0c0;
+            font-size: 14.5px;
+            color: #c8c8c8;
             line-height: 1.9;
-            padding-right: 10px;
+            padding-right: 5px;
         }
 
-        .separator-img {
-            display: block;
-            margin: 18px auto 5px;
-            max-width: 280px;
-            height: auto;
-            border-radius: 10px;
+        /* فاصل بين الأقسام الرئيسية */
+        .section-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 23, 68, 0.4), transparent);
+            margin: 25px 0;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.6;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 6px;
+            color: #ff1744;
+            margin: 5px 0 15px;
+            text-transform: uppercase;
             opacity: 0.7;
-            transition: opacity 0.3s;
-            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.3));
-        }
-
-        .separator-img:hover {
-            opacity: 1;
         }
 
         .back-btn-commands {
             display: block;
             margin: 35px auto;
-            padding: 12px 35px;
-            font-size: 15px;
+            padding: 13px 32px;
+            font-size: 14px;
             font-family: 'Cairo', sans-serif;
             background: transparent;
-            color: #ff6666;
-            border: 1.5px solid #ff3333;
+            color: #ff5252;
+            border: 1px solid rgba(255, 23, 68, 0.3);
             border-radius: 50px;
             cursor: pointer;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            letter-spacing: 3px;
+            transition: var(--transition);
         }
 
         .back-btn-commands:hover {
-            background: rgba(255, 0, 0, 0.15);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
-            color: #ff8888;
+            background: rgba(255, 23, 68, 0.08);
+            border-color: #ff1744;
+            box-shadow: 0 0 20px var(--crimson-glow);
         }
 
-        /* ========== الجزيئات ========== */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        /* ========== تجاوب الهواتف ========== */
+        @media (max-width: 600px) {
+            .title-hash {
+                font-size: 42px;
+                letter-spacing: 3px;
+            }
+            .title-crow {
+                font-size: 36px;
+                letter-spacing: 8px;
+                -webkit-text-stroke: 1.5px #ff1744;
+            }
+            .title-system {
+                font-size: 20px;
+                letter-spacing: 10px;
+            }
+            .start-btn {
+                font-size: 16px;
+                padding: 14px 35px;
+                letter-spacing: 3px;
+            }
+            .nav-btn {
+                font-size: 15px;
+                padding: 16px 18px;
+            }
+            .commands-title {
+                font-size: 22px;
+            }
+            .command-card {
+                padding: 18px 16px;
+                border-radius: var(--radius-md);
+            }
+            .command-card::after {
+                width: 2px;
+                top: 10%;
+                height: 80%;
+            }
+            .command-name {
+                font-size: 16px;
+            }
+            .command-desc {
+                font-size: 13px;
+                line-height: 1.7;
+            }
+            .command-header {
+                gap: 6px;
+            }
         }
 
-        .particle {
-            position: absolute;
-            background: #ff0000;
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-            opacity: 0;
+        /* سكرول بار */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            15% { opacity: 0.7; }
-            85% { opacity: 0.1; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
-
-        /* ========== تجاوب الموقع ========== */
-        @media (max-width: 768px) {
-            .command-card { padding: 20px; }
-            .command-name { font-size: 18px; }
-            .command-desc { font-size: 14px; }
-            .neon-btn { font-size: 16px; padding: 15px 20px; }
-            .start-btn { font-size: 18px; padding: 14px 40px; }
-            .separator-img { max-width: 200px; }
+        /* تحديد النص */
+        ::selection {
+            background: rgba(255, 23, 68, 0.3);
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
-    <div class="particles" id="particles"></div>
+    <div class="bg-layout">
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+    </div>
+    <div class="grid-overlay"></div>
 
     <!-- ========== الصفحة الرئيسية ========== -->
     <div class="main-page" id="mainPage">
-        <div class="grid-bg"></div>
-        <div class="glow-orb"></div>
-        <div class="title-container">
-            <span class="hash-symbol">#~</span>
+        <div class="title-block">
+            <span class="title-hash">#~</span>
             <br>
-            <span class="crow-text">CROW</span>
+            <span class="title-crow">CROW</span>
             <br>
-            <span class="system-text">SYSTEM</span>
-            <div class="decorative-line"></div>
+            <span class="title-system">SYSTEM</span>
+            <div class="divider-line"></div>
         </div>
-        <button class="start-btn" onclick="showButtonsPage()">ابدا</button>
+        <button class="start-btn" onclick="navigateTo('buttons')">ابدأ</button>
     </div>
 
     <!-- ========== صفحة الأزرار ========== -->
     <div class="buttons-page" id="buttonsPage">
+        <div class="buttons-bg-image"></div>
+        <div class="buttons-bg-overlay"></div>
         <div class="buttons-container">
-            <p class="page-subtitle">⎯⎯⎯⎯⎯⎯⎯⎯⎯ CROW SYSTEM ⎯⎯⎯⎯⎯⎯⎯⎯⎯</p>
-            <button class="neon-btn" onclick="showCommandsPage()">
-                📋 شرح مفصل للاوامر البوت
-            </button>
-            <button class="neon-btn" onclick="openLink('https://discord.gg/crow1')">
-                💬 سيرفر الدعم
-            </button>
-            <button class="neon-btn" onclick="openLink('https://discord.gg/sJSEHWvurW')">
-                🔗 رابط سيرفر الدعم الاحتياطي
-            </button>
-            <button class="back-btn" onclick="showMainPage()">↩ رجوع للرئيسية</button>
+            <p class="page-tag">— CROW SYSTEM —</p>
+            <button class="nav-btn" onclick="navigateTo('commands')">📋 شرح مفصل لجميع أوامر البوت</button>
+            <button class="nav-btn" onclick="openLink('https://discord.gg/crow1')">💬 سيرفر الدعم الرئيسي</button>
+            <button class="nav-btn" onclick="openLink('https://discord.gg/sJSEHWvurW')">🔗 سيرفر الدعم الاحتياطي</button>
+            <button class="back-btn" onclick="navigateTo('main')">↩ رجوع</button>
         </div>
     </div>
 
-    <!-- ========== صفحة شرح الأوامر ========== -->
+    <!-- ========== صفحة الأوامر ========== -->
     <div class="commands-page" id="commandsPage">
         <div class="commands-container">
-            <h1 class="commands-title">📖 شرح أوامر البوت</h1>
+            <h1 class="commands-title">📖 شرح جميع الأوامر</h1>
 
-            <!-- الأوامر هتتضاف هنا بعد ما تبعت الكود -->
+            <!-- قسم أوامر سلاش -->
+            <div class="section-divider"></div>
+            <p class="section-label">⚡ أوامر سلاش ⚡</p>
+
             <div class="command-card">
-                <div class="command-name">⚡ /ping</div>
-                <div class="command-desc">
-                    أمر فحص سرعة اتصال البوت. يعرض زمن الاستجابة (Ping) بالمللي ثانية للتأكد من أن البوت متصل ويعمل بكفاءة.
+                <div class="command-header">
+                    <span class="command-name">🛡️ /anti-spam</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    أمر إعداد نظام الحماية التلقائية من السبام في السيرفر. يسمح لك بتحديد الحد الأقصى لتكرار الحروف المتلاصقة في الكلمة الواحدة، وعدد الإيموجيات المسموحة في الرسالة، وعدد الأسطر القصوى لرسائل الكمبيوتر. كما يمكنك اختيار نوع العقوبة (حذف فقط أو حذف مع تايم أوت)، وتفعيل أو إيقاف أمر Snipe لاسترجاع الرسائل المحذوفة.
+                </div>
             </div>
 
             <div class="command-card">
-                <div class="command-name">🔒 /ban</div>
-                <div class="command-desc">
-                    أمر حظر عضو من السيرفر بشكل دائم أو مؤقت. يتطلب صلاحيات الحظر، مع إمكانية إضافة سبب يظهر في سجل الحظر.
+                <div class="command-header">
+                    <span class="command-name">⚙️ /اعداد-تشهير</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    لوحة تحكم شاملة لإعداد نظام التشهير بالكامل. من خلالها تقدر تحدد البريفكس الخاص بالأمر، واسم الأمر المخصص، ورتب المجموعة الأولى (الإدارة العادية) والمجموعة الثانية (الإدارة العليا)، ورتبة المنشن الرسمي عند نشر التشهير، وروم استقبال بلاغات التشهير، وروم النشر العام المفتوح.
+                </div>
             </div>
 
             <div class="command-card">
-                <div class="command-name">👢 /kick</div>
-                <div class="command-desc">
-                    أمر طرد عضو من السيرفر مع إمكانية عودته مجدداً بدعوة جديدة. يتطلب صلاحية الطرد.
+                <div class="command-header">
+                    <span class="command-name">⛓️ /اعداد-سجن</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    إعداد نظام السجن المتكامل في السيرفر. يسمح بتحديد البريفكس، وأسماء أوامر السجن والإفراج والمؤبد والاستعلام، ورتب الإدارة المتوسطة (تستخدم السجن والإفراج والاستعلام)، ورتب الإدارة العليا/الشيبات (تستخدم كل الأوامر والمؤبد)، وروم اللوج، ورتبة المسجون التي تمنع العضو من التحدث.
+                </div>
             </div>
 
             <div class="command-card">
-                <div class="command-name">🔇 /mute</div>
-                <div class="command-desc">
-                    أمر كتم عضو في القنوات النصية والصوتية. يدعم الكتم المؤقت بمدة محددة أو الكتم الدائم حتى يتم فكه يدوياً.
+                <div class="command-header">
+                    <span class="command-name">⛱️ /اعداد_اجازه</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    إعداد نظام الإجازات للموظفين والأعضاء. تقدر تحدد البريفكس، اسم أمر الإجازة، اسم أمر الرجوع من الإجازة، الرتب المسموح لها بإعطاء إجازات، روم اللوج، رتبة الإجازة المؤقتة، وطريقة حماية الرتب (إما اختيار رتب محددة يتم إزالتها أو اختيار رتبة ويتم إزالة كل ما فوقها).
+                </div>
             </div>
 
             <div class="command-card">
-                <div class="command-name">🔊 /unmute</div>
-                <div class="command-desc">
-                    أمر فك الكتم عن عضو ليعود قادراً على التحدث في القنوات بشكل طبيعي.
+                <div class="command-header">
+                    <span class="command-name">🔨 /اعداد_فصل</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    إعداد نظام الفصل وحذف الرتب. يسمح بتحديد البريفكس، اسم الأمر، لون لوج الفصل، الرتب المسموح لها باستخدام الأمر، روم اللوج، وطريقة حذف الرتب (رتب محددة أو رتبة وكل ما فوقها). النظام لا يطرد العضو بل يحذف رتبه المحددة فقط.
+                </div>
             </div>
 
             <div class="command-card">
-                <div class="command-name">🧹 /clear</div>
-                <div class="command-desc">
-                    أمر حذف عدد محدد من الرسائل دفعة واحدة (حتى 100 رسالة) لتنظيف الشات بسرعة. يتطلب صلاحية إدارة الرسائل.
+                <div class="command-header">
+                    <span class="command-name">🚀 /اعداد_انعاش</span>
+                    <span class="command-badge badge-slash">Slash</span>
                 </div>
-                <img src="3_20260614211139.png" alt="separator" class="separator-img">
+                <div class="command-desc">
+                    إعداد نظام إنعاش السيرفر لإرسال رسائل جماعية تنشط الشات. تقدر تحدد البريفكس، أسماء أوامر الإنعاش المختلفة (العادي، info، reset، emr، set)، رسالة الإنعاش، الكول داون بين كل إنعاش والتاني، عدد الاستخدامات اليومية، الرتب المسموحة، روم اللوج، رتبة المنشن للإنعاش العادي، ورتبة منشن منفصلة للإنعاش الطارئ EMR.
+                </div>
             </div>
 
-            <button class="back-btn-commands" onclick="showButtonsPageFromCommands()">↩ العودة للأزرار</button>
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">📝 /say</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إرسال رسالة نصية عادية إلى روم محدد أو نفس الروم الحالي. يفتح نافذة إدخال تطلب منك كتابة محتوى الرسالة وآيدي الروم المستهدف (اختياري). مفيد لإرسال إعلانات أو تنبيهات بشكل منظم.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🎨 /say2</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إرسال رسالة منسقة (Embed) إلى روم محدد أو نفس الروم. يسمح بإدخال عنوان للرسالة، المحتوى الرئيسي، لون الإطار (بالعربي أو Hex)، وآيدي الروم المستهدف. يدعم ألوان: أحمر، أخضر، أزرق، أصفر، بنفسجي، برتقالي.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">💬 /رد_تلقائي</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    نظام متكامل لإدارة الردود التلقائية في السيرفر. يحتوي على 4 أوامر فرعية:<br>
+                    • <strong>اضافة:</strong> إضافة رد تلقائي جديد مع إمكانية ربطه برتبة معينة<br>
+                    • <strong>حذف:</strong> حذف رد تلقائي موجود<br>
+                    • <strong>تعديل:</strong> تعديل رد موجود (الكلمة، الرد، الرتبة، حذف الرسالة الأصلية، المنشن)<br>
+                    • <strong>قائمة:</strong> عرض كل الردود المسجلة في السيرفر
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">👑 /server</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إدارة السيرفرات المسموحة للبوت. <strong>خاص بصاحب البوت فقط ويعمل في الخاص حصراً.</strong> يحتوي على 6 أوامر فرعية: إضافة سيرفر (دائم أو بمدة مؤقتة)، إزالة سيرفر، حظر سيرفر، إلغاء الحظر، عرض قائمة السيرفرات، وعرض حالة سيرفر معين.
+                </div>
+            </div>
+
+            <!-- قسم أوامر البريفكس -->
+            <div class="section-divider"></div>
+            <p class="section-label">💬 أوامر البريفكس 💬</p>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🛑 +تشهير</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أمر بريفكس يفتح لوحة تقديم بلاغ تشهير. بمجرد كتابة الأمر، يظهر زر "تقديم طلب تشهير" يفتح نافذة إدخال تطلب: آيدي النصاب، آيدي المنصوب عليه، القصة الكاملة، وروابط الإثباتات. البلاغ يذهب لروم الفحص الخاص بالإدارة العليا للمراجعة والاعتماد.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">⛓️ +سجن / +افراج / +مؤبد / +مسجون</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أوامر نظام السجن عبر البريفكس:<br>
+                    • <strong>+سجن @منشن [السبب]:</strong> سجن عضو وإعطائه رتبة المسجون مع حفظ رتبه السابقة<br>
+                    • <strong>+افراج @منشن:</strong> فك السجن وإرجاع الرتب السابقة للعضو<br>
+                    • <strong>+مؤبد @منشن [تفعيل/ايقاف]:</strong> قفل أو فك المؤبد عن مسجون (للشيبات فقط)<br>
+                    • <strong>+مسجون @منشن [سجل]:</strong> عرض معلومات المسجون أو سجل سجنه الكامل
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">⛱️ +اجازه / +رجوع</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أوامر نظام الإجازات:<br>
+                    • <strong>+اجازه @منشن [المدة] [السبب]:</strong> إعطاء عضو إجازة بمدة محددة (مثل 5d لأيام، 7w لأسابيع، 10m لدقائق، 30s لثواني) مع إزالة رتب محددة وحفظها<br>
+                    • <strong>+رجوع @منشن:</strong> إنهاء إجازة العضو وإرجاع جميع رتبه السابقة<br>
+                    • النظام تلقائياً يرجع الرتب عند انتهاء مدة الإجازة
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🔨 +فصل</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أمر فصل عضو وحذف رتب محددة منه حسب الإعدادات. الصيغة: <strong>+فصل @منشن [السبب]</strong>. لا يطرد العضو من السيرفر بل يحذف فقط الرتب المحددة في إعدادات النظام. يتم تسجيل العملية في روم اللوج مع تفاصيل كاملة.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🚀 +انعاش / +انعاشinfo / +انعاشreset / +انعاشemr / +انعاشset</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أوامر نظام إنعاش السيرفر:<br>
+                    • <strong>+انعاش:</strong> إرسال رسالة إنعاش مع منشن للرتبة المحددة (يخضع للكول داون والحد اليومي)<br>
+                    • <strong>+انعاشinfo:</strong> عرض حالة الإنعاش الحالية والاستخدامات المتبقية والكول داون<br>
+                    • <strong>+انعاشreset:</strong> إعادة ضبط الكول داون والعداد اليومي (للإدارة العليا)<br>
+                    • <strong>+انعاشemr:</strong> إنعاش طارئ بمنشن مختلف وبدون حدود (للإدارة العليا)<br>
+                    • <strong>+انعاشset [تفعيل/ايقاف]:</strong> تفعيل أو إيقاف نظام الإنعاشات بالكامل
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🗑️ +snipe</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أمر استرجاع آخر رسالة سبام تم حذفها بواسطة نظام الحماية التلقائية. يظهر محتوى الرسالة المحذوفة ومرسلها وتوقيت حذفها. يمكن استخدام رقم لاستعراض رسائل أقدم: <strong>+snipe 3</strong>. لا يعمل إلا إذا كان مفعلاً من إعدادات anti-spam.
+                </div>
+            </div>
+
+            <button class="back-btn-commands" onclick="navigateTo('buttons')">↩ العودة للأزرار</button>
         </div>
     </div>
 
     <script>
-        // إنشاء الجزيئات
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 35; i++) {
-                const p = document.createElement('div');
-                p.classList.add('particle');
-                p.style.left = Math.random() * 100 + '%';
-                p.style.width = Math.random() * 3 + 1.5 + 'px';
-                p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 10 + 8 + 's';
-                p.style.animationDelay = Math.random() * 10 + 's';
-                p.style.background = Math.random() > 0.5 ? '#ff0000' : '#aa0000';
-                container.appendChild(p);
-            }
+        function navigateTo(page) {
+            document.getElementById('mainPage').style.display = page === 'main' ? 'flex' : 'none';
+            document.getElementById('buttonsPage').style.display = page === 'buttons' ? 'block' : 'none';
+            document.getElementById('commandsPage').style.display = page === 'commands' ? 'block' : 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        createParticles();
 
-        // التنقل
-        function showButtonsPage() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('buttonsPage').style.display = 'flex';
-            document.getElementById('commandsPage').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-        function showMainPage() {
-            document.getElementById('mainPage').style.display = 'flex';
-            document.getElementById('buttonsPage').style.display = 'none';
-            document.getElementById('commandsPage').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-        function showCommandsPage() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('buttonsPage').style.display = 'none';
-            document.getElementById('commandsPage').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-        function showButtonsPageFromCommands() {
-            document.getElementById('mainPage').style.display = 'none';
-            document.getElementById('buttonsPage').style.display = 'flex';
-            document.getElementById('commandsPage').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
         function openLink(url) {
             window.open(url, '_blank');
         }
