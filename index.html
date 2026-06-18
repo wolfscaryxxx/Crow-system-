@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#~ CROW SYSTEM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Changa:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #050505;
@@ -32,7 +31,7 @@
         }
 
         body {
-            font-family: 'Cairo', 'Changa', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-deep);
             color: var(--text-primary);
             min-height: 100vh;
@@ -119,80 +118,23 @@
             padding: 20px;
         }
 
-        .title-block {
-            text-align: center;
-            position: relative;
+        .main-logo {
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 0 30px rgba(255, 23, 68, 0.4));
+            animation: logoPulse 3s ease-in-out infinite;
         }
 
-        .title-hash {
-            font-size: clamp(45px, 8vw, 95px);
-            font-weight: 900;
-            letter-spacing: 6px;
-            background: linear-gradient(180deg, #ff5252 0%, #ff1744 45%, #8b0000 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 35px rgba(255, 23, 68, 0.5));
-            animation: crimsonPulse 3s ease-in-out infinite;
-            display: inline-block;
-            line-height: 1.2;
-        }
-
-        @keyframes crimsonPulse {
-            0%, 100% {
-                filter: drop-shadow(0 0 35px rgba(255, 23, 68, 0.5));
-            }
-            50% {
-                filter: drop-shadow(0 0 60px rgba(255, 23, 68, 0.8));
-            }
-        }
-
-        .title-crow {
-            font-size: clamp(40px, 7vw, 80px);
-            font-weight: 900;
-            letter-spacing: 16px;
-            color: transparent;
-            -webkit-text-stroke: 2px #ff1744;
-            text-shadow: 0 0 25px rgba(255, 23, 68, 0.6);
-            animation: strokeGlow 3.5s ease-in-out infinite;
-            display: inline-block;
-            line-height: 1.2;
-        }
-
-        @keyframes strokeGlow {
-            0%, 100% {
-                text-shadow: 0 0 25px rgba(255, 23, 68, 0.6);
-            }
-            50% {
-                text-shadow: 0 0 45px rgba(255, 23, 68, 0.9), 0 0 70px rgba(255, 23, 68, 0.4);
-            }
-        }
-
-        .title-system {
-            font-size: clamp(24px, 3.5vw, 38px);
-            font-weight: 700;
-            letter-spacing: 20px;
-            color: #6d1212;
-            text-shadow: 0 0 18px rgba(255, 23, 68, 0.45);
-            display: inline-block;
-            line-height: 1.2;
-        }
-
-        .divider-line {
-            width: 90px;
-            height: 2.5px;
-            background: linear-gradient(90deg, transparent, #ff1744, transparent);
-            margin: 22px auto;
-            border-radius: 10px;
-            opacity: 0.7;
+        @keyframes logoPulse {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 23, 68, 0.4)); }
+            50% { filter: drop-shadow(0 0 50px rgba(255, 23, 68, 0.7)); }
         }
 
         .start-btn {
-            margin-top: 45px;
             padding: 17px 55px;
             font-size: 19px;
             font-weight: 700;
-            font-family: 'Cairo', sans-serif;
             letter-spacing: 5px;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(18px);
@@ -275,7 +217,6 @@
             padding: 19px 26px;
             font-size: 17px;
             font-weight: 700;
-            font-family: 'Cairo', sans-serif;
             background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -317,7 +258,6 @@
             margin-top: 8px;
             padding: 13px 32px;
             font-size: 14px;
-            font-family: 'Cairo', sans-serif;
             background: transparent;
             color: #ff5252;
             border: 1px solid rgba(255, 23, 68, 0.3);
@@ -380,7 +320,6 @@
             transform: translateY(-2px);
         }
 
-        /* خط النيون الجانبي للكارت */
         .command-card::after {
             content: '';
             position: absolute;
@@ -443,7 +382,6 @@
             padding-right: 5px;
         }
 
-        /* فاصل بين الأقسام الرئيسية */
         .section-divider {
             width: 100%;
             height: 2px;
@@ -469,7 +407,6 @@
             margin: 35px auto;
             padding: 13px 32px;
             font-size: 14px;
-            font-family: 'Cairo', sans-serif;
             background: transparent;
             color: #ff5252;
             border: 1px solid rgba(255, 23, 68, 0.3);
@@ -485,20 +422,11 @@
             box-shadow: 0 0 20px var(--crimson-glow);
         }
 
-        /* ========== تجاوب الهواتف ========== */
+        /* تجاوب */
         @media (max-width: 600px) {
-            .title-hash {
-                font-size: 42px;
-                letter-spacing: 3px;
-            }
-            .title-crow {
-                font-size: 36px;
-                letter-spacing: 8px;
-                -webkit-text-stroke: 1.5px #ff1744;
-            }
-            .title-system {
-                font-size: 20px;
-                letter-spacing: 10px;
+            .main-logo {
+                max-width: 95%;
+                margin-bottom: 30px;
             }
             .start-btn {
                 font-size: 16px;
@@ -528,31 +456,13 @@
                 font-size: 13px;
                 line-height: 1.7;
             }
-            .command-header {
-                gap: 6px;
-            }
         }
 
-        /* سكرول بار */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-deep);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1a1a1a;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #333;
-        }
-
-        /* تحديد النص */
-        ::selection {
-            background: rgba(255, 23, 68, 0.3);
-            color: #fff;
-        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333; }
+        ::selection { background: rgba(255, 23, 68, 0.3); color: #fff; }
     </style>
 </head>
 <body>
@@ -563,20 +473,14 @@
     </div>
     <div class="grid-overlay"></div>
 
-    <!-- ========== الصفحة الرئيسية ========== -->
+    <!-- الصفحة الرئيسية - الشعار الجديد -->
     <div class="main-page" id="mainPage">
-        <div class="title-block">
-            <span class="title-hash">#~</span>
-            <br>
-            <span class="title-crow">CROW</span>
-            <br>
-            <span class="title-system">SYSTEM</span>
-            <div class="divider-line"></div>
-        </div>
+        <!-- غير اسم الصورة هنا لو هتستخدم اسم تاني -->
+        <img src="logo.png" alt="Crow System Logo" class="main-logo">
         <button class="start-btn" onclick="navigateTo('buttons')">ابدأ</button>
     </div>
 
-    <!-- ========== صفحة الأزرار ========== -->
+    <!-- صفحة الأزرار -->
     <div class="buttons-page" id="buttonsPage">
         <div class="buttons-bg-image"></div>
         <div class="buttons-bg-overlay"></div>
@@ -589,12 +493,11 @@
         </div>
     </div>
 
-    <!-- ========== صفحة الأوامر ========== -->
+    <!-- صفحة الأوامر -->
     <div class="commands-page" id="commandsPage">
         <div class="commands-container">
             <h1 class="commands-title">📖 شرح جميع الأوامر</h1>
 
-            <!-- قسم أوامر سلاش -->
             <div class="section-divider"></div>
             <p class="section-label">⚡ أوامر سلاش ⚡</p>
 
@@ -692,7 +595,6 @@
                 </div>
             </div>
 
-            <!-- قسم أوامر البريفكس -->
             <div class="section-divider"></div>
             <p class="section-label">💬 أوامر البريفكس 💬</p>
 
