@@ -485,11 +485,13 @@
     </div>
     <div class="grid-overlay"></div>
 
+    <!-- ========== الصفحة الرئيسية ========== -->
     <div class="main-page" id="mainPage">
         <img src="logo.png" alt="Crow System Logo" class="main-logo">
         <button class="start-btn" onclick="navigateTo('buttons')">ابدأ</button>
     </div>
 
+    <!-- ========== صفحة الأزرار ========== -->
     <div class="buttons-page" id="buttonsPage">
         <div class="buttons-bg-image"></div>
         <div class="buttons-bg-overlay"></div>
@@ -502,10 +504,12 @@
         </div>
     </div>
 
+    <!-- ========== صفحة الأوامر ========== -->
     <div class="commands-page" id="commandsPage">
         <div class="commands-container">
             <h1 class="commands-title">📖 شرح جميع الأوامر</h1>
 
+            <!-- ============================== قسم أوامر الموديريشن والإعدادات (Slash) ============================== -->
             <div class="section-divider">
                 <span class="section-title">⚙️ إعدادات النظام وأنظمة الحماية (SLASH)</span>
             </div>
@@ -574,54 +578,7 @@
                 </div>
             </div>
 
-            <div class="section-divider">
-                <span class="section-title">📊 أوامر النشاط، الإحصائيات، والتعديلات (SLASH)</span>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">🏥 /اعداد-الاطباء</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر خاص بإدارة وتجهيز نظام الأطباء والإدارة داخل السيرفر. يمكنك من خلاله تحديد وتخصيص رتبة الأطباء ورتبة الإدارة لمتابعة نشاطهم بدقة وتوثيق عمليات الأونلاين والتصفير الخاصة بهم.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">⏱️ /اونلاين</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر لتسجيل نشاط الأطباء أو الإداريين. يحتوي على خيارين فرعيين:<br>
-                    • <strong>اطباء:</strong> لتسجيل دخول/خروج الطبيب وحساب ساعات عمله ونشاطه تلقائياً.<br>
-                    • <strong>ادارة:</strong> لتسجيل دخول/خروج الإداري لمراقبة فترات تواجده وتفاعله في السيرفر.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">🔄 /تصفير</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر مخصص لتصفير إحصائيات النشاط والعمل لبدء دورة مراقبة جديدة. يحتوي على خيارين:<br>
-                    • <strong>اطباء:</strong> لتصفير سجل ساعات عمل ونشاط كافة الأطباء المسجلين.<br>
-                    • <strong>ادارة:</strong> لتصفير سجل فترات الأونلاين والنشاط الخاص ب طاقم الإدارة.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">👤 /تعديل-رتب</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر إداري متقدم للتحكم برتب الأعضاء فورياً. يتيح لك اختيار العضو واختيار رتبة معينة، ثم تحديد الإجراء المطلوب إما بـ <strong>إعطاء</strong> الرتبة للعضو أو <strong>إزالتها</strong> منه مباشرة دون الحاجة لفتح القائمة الجانبية لديسكورد.
-                </div>
-            </div>
-
+            <!-- ============================== قسم أوامر النشر والإعلانات (Slash) ============================== -->
             <div class="section-divider">
                 <span class="section-title">📢 أوامر النشر المطور والإعلانات (SLASH)</span>
             </div>
@@ -642,7 +599,7 @@
                     <span class="command-badge badge-slash">Slash</span>
                 </div>
                 <div class="command-desc">
-                    أمر إرسال رسالة منسقة واحترافية (Embed) إلى روم محدد أو نفس الروم. يتيح لك إدخال العنوان، المحتوى، ولون الإطار. <strong>الميزة الجديدة:</strong> يمكنك الآن كتابة إيموجي (رياكشن) في خيار "reaction" ليقوم البوت بوضعه تلقائياً أسفل رسالة الإمبيد فور نشرها للتفاعل!
+                    أمر إرسال رسالة منسقة واحترافية (Embed) إلى روم محدد أو نفس الروم. يتيح لك إدخال العنوان، المحتوى، ولون الإطار. يمكنك كتابة إيموجي (رياكشن) في خيار "reaction" ليقوم البوت بوضعه تلقائياً أسفل رسالة الإمبيد فور نشرها للتفاعل.
                 </div>
             </div>
 
@@ -656,6 +613,7 @@
                 </div>
             </div>
 
+            <!-- ============================== قسم أوامر البريفكس (Prefix) ============================== -->
             <div class="section-divider">
                 <span class="section-title">💬 أوامر التشغيل عبر البريفكس المخصص (PREFIX)</span>
             </div>
@@ -691,7 +649,7 @@
                 </div>
                 <div class="command-desc">
                     أوامر نظام الإجازات للموظفين بالطريقة المحددة في الإعدادات:<br>
-                    • <strong>أمر الإجازة @منشن [المدة] [السبب]:</strong> إعطاء إجازة بمدة محددة (يدعم الاختصارات الذكية مثل: <code>5d</code> أيام، <code>7w</code> أسابيع، <code>10m</code> دقائق، <code>30s</code> ثواني) مع إزالة الرتب لحمايتها وحفظها.<br>
+                    • <strong>أمر الإجازة @منشن [المدة] [السبب]:</strong> إعطاء إجازة بمدة محددة (يدعم الاختصارات الذكية مثل: <code>5d</code> أيام، <code>7w</code> أسابيع، <code>10m</code> دقائق) مع إزالة الرتب لحمايتها وحفظها.<br>
                     • <strong>أمر الرجوع @منشن:</strong> إنهاء إجازة العضو يدوياً فوراً وإرجاع جميع رتبه السابقة.<br>
                     • <strong>ميزة التلقائية:</strong> ينتهي أمر الإجازة ويعيد البوت الرتب للعضو تلقائياً بمجرد انتهاء الوقت المكتوب دون تدخل إداري!
                 </div>
