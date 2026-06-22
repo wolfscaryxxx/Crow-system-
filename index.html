@@ -386,8 +386,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin: 30px 0 20px;
-            opacity: 0.8;
+            margin: 40px 0 25px;
+            opacity: 0.9;
         }
 
         .section-divider::before,
@@ -398,16 +398,13 @@
             background: linear-gradient(90deg, transparent, rgba(255, 23, 68, 0.5), transparent);
         }
 
-        .section-divider-icon {
+        .section-title {
             color: #ff1744;
-            font-size: 16px;
-            text-shadow: 0 0 15px rgba(255, 23, 68, 0.6);
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
         }
 
         .back-btn-commands {
@@ -434,120 +431,35 @@
 
         /* ========== تجاوب الهواتف ========== */
         @media (max-width: 480px) {
-            .main-page {
-                padding: 25px 16px;
-            }
-
-            .main-logo {
-                width: min(90%, 300px);
-                margin-bottom: 40px;
-            }
-
-            .start-btn {
-                padding: 15px 40px;
-                font-size: 16px;
-                letter-spacing: 3px;
-                width: 100%;
-                max-width: 280px;
-                text-align: center;
-            }
-
-            .buttons-page {
-                padding: 30px 12px;
-            }
-
-            .buttons-container {
-                gap: 12px;
-                padding-top: 15px;
-            }
-
-            .nav-btn {
-                padding: 16px 18px;
-                font-size: 15px;
-                border-radius: 12px;
-            }
-
-            .page-tag {
-                font-size: 9px;
-                letter-spacing: 5px;
-            }
-
-            .commands-page {
-                padding: 25px 12px;
-            }
-
-            .commands-title {
-                font-size: 22px;
-                margin-bottom: 25px;
-            }
-
-            .command-card {
-                padding: 16px 14px;
-                border-radius: 14px;
-                margin-bottom: 12px;
-            }
-
-            .command-card::after {
-                width: 2px;
-                top: 10%;
-                height: 80%;
-            }
-
-            .command-header {
-                gap: 6px;
-                margin-bottom: 8px;
-            }
-
-            .command-name {
-                font-size: 15px;
-            }
-
-            .command-desc {
-                font-size: 13px;
-                line-height: 1.7;
-            }
-
-            .command-badge {
-                font-size: 7px;
-                padding: 2px 6px;
-            }
-
-            .section-divider {
-                margin: 25px 0 15px;
-            }
-
-            .section-divider-icon {
-                font-size: 14px;
-            }
-
-            .back-btn,
-            .back-btn-commands {
-                padding: 10px 25px;
-                font-size: 13px;
-                letter-spacing: 2px;
-            }
+            .main-page { padding: 25px 16px; }
+            .main-logo { width: min(90%, 300px); margin-bottom: 40px; }
+            .start-btn { padding: 15px 40px; font-size: 16px; letter-spacing: 3px; width: 100%; max-width: 280px; text-align: center; }
+            .buttons-page { padding: 30px 12px; }
+            .buttons-container { gap: 12px; padding-top: 15px; }
+            .nav-btn { padding: 16px 18px; font-size: 15px; border-radius: 12px; }
+            .page-tag { font-size: 9px; letter-spacing: 5px; }
+            .commands-page { padding: 25px 12px; }
+            .commands-title { font-size: 22px; margin-bottom: 25px; }
+            .command-card { padding: 16px 14px; border-radius: 14px; margin-bottom: 12px; }
+            .command-card::after { width: 2px; top: 10%; height: 80%; }
+            .command-header { gap: 6px; margin-bottom: 8px; }
+            .command-name { font-size: 15px; }
+            .command-desc { font-size: 13px; line-height: 1.7; }
+            .command-badge { font-size: 7px; padding: 2px 6px; }
+            .section-divider { margin: 30px 0 20px; }
+            .back-btn, .back-btn-commands { padding: 10px 25px; font-size: 13px; letter-spacing: 2px; }
         }
 
         /* ========== تجاوب التابلت ========== */
         @media (min-width: 481px) and (max-width: 1024px) {
-            .main-logo {
-                width: min(70%, 350px);
-            }
-
-            .commands-container {
-                max-width: 650px;
-            }
+            .main-logo { width: min(70%, 350px); }
+            .commands-container { max-width: 650px; }
         }
 
         /* ========== شاشات كبيرة ========== */
         @media (min-width: 1025px) {
-            .commands-container {
-                max-width: 780px;
-            }
-
-            .command-card {
-                padding: 24px 28px;
-            }
+            .commands-container { max-width: 780px; }
+            .command-card { padding: 24px 28px; }
         }
 
         /* سكرول بار */
@@ -559,10 +471,7 @@
 
         /* تحسين اللمس للهواتف */
         @media (hover: none) and (pointer: coarse) {
-            .nav-btn:active,
-            .start-btn:active,
-            .back-btn:active,
-            .back-btn-commands:active {
+            .nav-btn:active, .start-btn:active, .back-btn:active, .back-btn-commands:active {
                 transform: scale(0.97);
             }
         }
@@ -576,13 +485,11 @@
     </div>
     <div class="grid-overlay"></div>
 
-    <!-- ========== الصفحة الرئيسية ========== -->
     <div class="main-page" id="mainPage">
         <img src="logo.png" alt="Crow System Logo" class="main-logo">
         <button class="start-btn" onclick="navigateTo('buttons')">ابدأ</button>
     </div>
 
-    <!-- ========== صفحة الأزرار ========== -->
     <div class="buttons-page" id="buttonsPage">
         <div class="buttons-bg-image"></div>
         <div class="buttons-bg-overlay"></div>
@@ -595,14 +502,12 @@
         </div>
     </div>
 
-    <!-- ========== صفحة الأوامر ========== -->
     <div class="commands-page" id="commandsPage">
         <div class="commands-container">
             <h1 class="commands-title">📖 شرح جميع الأوامر</h1>
 
-            <!-- فاصل قسم أوامر سلاش -->
             <div class="section-divider">
-                <span class="section-divider-icon">⚡</span>
+                <span class="section-title">⚙️ إعدادات النظام وأنظمة الحماية (SLASH)</span>
             </div>
 
             <div class="command-card">
@@ -657,26 +562,6 @@
 
             <div class="command-card">
                 <div class="command-header">
-                    <span class="command-name">📝 /say</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر إرسال رسالة نصية عادية إلى روم محدد أو نفس الروم الحالي. يفتح نافذة إدخال تطلب منك كتابة محتوى الرسالة وآيدي الروم المستهدف (اختياري). مفيد لإرسال إعلانات أو تنبيهات بشكل منظم.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">🎨 /say2</span>
-                    <span class="command-badge badge-slash">Slash</span>
-                </div>
-                <div class="command-desc">
-                    أمر إرسال رسالة منسقة (Embed) إلى روم محدد أو نفس الروم. يسمح بإدخال عنوان للرسالة، المحتوى الرئيسي، لون الإطار (بالعربي أو Hex)، وآيدي الروم المستهدف. يدعم ألوان: أحمر، أخضر، أزرق، أصفر، بنفسجي، برتقالي.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
                     <span class="command-name">💬 /رد_تلقائي</span>
                     <span class="command-badge badge-slash">Slash</span>
                 </div>
@@ -689,65 +574,136 @@
                 </div>
             </div>
 
+            <div class="section-divider">
+                <span class="section-title">📊 أوامر النشاط، الإحصائيات، والتعديلات (SLASH)</span>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🏥 /اعداد-الاطباء</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر خاص بإدارة وتجهيز نظام الأطباء والإدارة داخل السيرفر. يمكنك من خلاله تحديد وتخصيص رتبة الأطباء ورتبة الإدارة لمتابعة نشاطهم بدقة وتوثيق عمليات الأونلاين والتصفير الخاصة بهم.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">⏱️ /اونلاين</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر لتسجيل نشاط الأطباء أو الإداريين. يحتوي على خيارين فرعيين:<br>
+                    • <strong>اطباء:</strong> لتسجيل دخول/خروج الطبيب وحساب ساعات عمله ونشاطه تلقائياً.<br>
+                    • <strong>ادارة:</strong> لتسجيل دخول/خروج الإداري لمراقبة فترات تواجده وتفاعله في السيرفر.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🔄 /تصفير</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر مخصص لتصفير إحصائيات النشاط والعمل لبدء دورة مراقبة جديدة. يحتوي على خيارين:<br>
+                    • <strong>اطباء:</strong> لتصفير سجل ساعات عمل ونشاط كافة الأطباء المسجلين.<br>
+                    • <strong>ادارة:</strong> لتصفير سجل فترات الأونلاين والنشاط الخاص ب طاقم الإدارة.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">👤 /تعديل-رتب</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إداري متقدم للتحكم برتب الأعضاء فورياً. يتيح لك اختيار العضو واختيار رتبة معينة، ثم تحديد الإجراء المطلوب إما بـ <strong>إعطاء</strong> الرتبة للعضو أو <strong>إزالتها</strong> منه مباشرة دون الحاجة لفتح القائمة الجانبية لديسكورد.
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-title">📢 أوامر النشر المطور والإعلانات (SLASH)</span>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">📝 /say</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إرسال رسالة نصية عادية إلى روم محدد أو نفس الروم الحالي. يفتح نافذة إدخال تطلب منك كتابة محتوى الرسالة وآيدي الروم المستهدف (اختياري). مفيد لإرسال إعلانات أو تنبيهات بشكل منظم.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🎨 /say2 (نظام الـ Embed المطور)</span>
+                    <span class="command-badge badge-slash">Slash</span>
+                </div>
+                <div class="command-desc">
+                    أمر إرسال رسالة منسقة واحترافية (Embed) إلى روم محدد أو نفس الروم. يتيح لك إدخال العنوان، المحتوى، ولون الإطار. <strong>الميزة الجديدة:</strong> يمكنك الآن كتابة إيموجي (رياكشن) في خيار "reaction" ليقوم البوت بوضعه تلقائياً أسفل رسالة الإمبيد فور نشرها للتفاعل!
+                </div>
+            </div>
+
             <div class="command-card">
                 <div class="command-header">
                     <span class="command-name">👑 /server</span>
                     <span class="command-badge badge-slash">Slash</span>
                 </div>
                 <div class="command-desc">
-                    أمر إدارة السيرفرات المسموحة للبوت. <strong>خاص بصاحب البوت فقط ويعمل في الخاص حصراً.</strong> يحتوي على 6 أوامر فرعية: إضافة سيرفر (دائم أو بمدة مؤقتة)، إزالة سيرفر، حظر سيرفر، إلغاء الحظر، عرض قائمة السيرفرات، وعرض حالة سيرفر معين.
+                    أمر إدارة السيرفرات المسموحة للبوت. <strong>خاص بصاحب البوت فقط ويمتلك حماية صارمة ليعمل في الخاص حصراً.</strong> يحتوي على 6 أوامر فرعية: إضافة سيرفر (دائم أو بمدة مؤقتة)، إزالة سيرفر، حظر سيرفر، إلغاء الحظر، عرض قائمة السيرفرات المشغلة للبوت، وعرض حالة سيرفر معين.
                 </div>
             </div>
 
-            <!-- فاصل قسم أوامر البريفكس -->
             <div class="section-divider">
-                <span class="section-divider-icon">💬</span>
+                <span class="section-title">💬 أوامر التشغيل عبر البريفكس المخصص (PREFIX)</span>
             </div>
 
             <div class="command-card">
                 <div class="command-header">
-                    <span class="command-name">🛑 +تشهير</span>
+                    <span class="command-name">🛑 [اسم أمر التشهير المخصص]</span>
                     <span class="command-badge badge-prefix">Prefix</span>
                 </div>
                 <div class="command-desc">
-                    أمر بريفكس يفتح لوحة تقديم بلاغ تشهير. بمجرد كتابة الأمر، يظهر زر "تقديم طلب تشهير" يفتح نافذة إدخال تطلب: آيدي النصاب، آيدي المنصوب عليه، القصة الكاملة، وروابط الإثباتات. البلاغ يذهب لروم الفحص الخاص بالإدارة العليا للمراجعة والاعتماد.
-                </div>
-            </div>
-
-            <div class="command-card">
-                <div class="command-header">
-                    <span class="command-name">⛓️ +سجن / +افراج / +مؤبد / +مسجون</span>
-                    <span class="command-badge badge-prefix">Prefix</span>
-                </div>
-                <div class="command-desc">
-                    أوامر نظام السجن عبر البريفكس:<br>
-                    • <strong>+سجن @منشن [السبب]:</strong> سجن عضو وإعطائه رتبة المسجون مع حفظ رتبه السابقة<br>
-                    • <strong>+افراج @منشن:</strong> فك السجن وإرجاع الرتب السابقة للعضو<br>
-                    • <strong>+مؤبد @منشن [تفعيل/ايقاف]:</strong> قفل أو فك المؤبد عن مسجون (للشيبات فقط)<br>
-                    • <strong>+مسجون @منشن [سجل]:</strong> عرض معلومات المسجون أو سجل سجنه الكامل
+                    أمر بريفكس (يتم تحديد اسمه من الإعدادات مثل <code>+تشهير</code>) يفتح لوحة تقديم بلاغ تشهير. بمجرد كتابة الأمر، يظهر زر "تقديم طلب تشهير" يفتح نافذة إدخال تطلب: آيدي النصاب، آيدي المنصوب عليه، القصة الكاملة، وروابط الإثباتات. البلاغ يذهب لروم الفحص الخاص بالإدارة العليا للمراجعة والاعتماد والرفض/النشر التلقائي بالعقوبة المناسبة.
                 </div>
             </div>
 
             <div class="command-card">
                 <div class="command-header">
-                    <span class="command-name">⛱️ +اجازه / +رجوع</span>
+                    <span class="command-name">⛓️ [أوامر السجن والافراج والمؤبد والاستعلام]</span>
                     <span class="command-badge badge-prefix">Prefix</span>
                 </div>
                 <div class="command-desc">
-                    أوامر نظام الإجازات:<br>
-                    • <strong>+اجازه @منشن [المدة] [السبب]:</strong> إعطاء عضو إجازة بمدة محددة (مثل 5d لأيام، 7w لأسابيع، 10m لدقائق، 30s لثواني) مع إزالة رتب محددة وحفظها<br>
-                    • <strong>+رجوع @منشن:</strong> إنهاء إجازة العضو وإرجاع جميع رتبه السابقة<br>
-                    • النظام تلقائياً يرجع الرتب عند انتهاء مدة الإجازة
+                    أوامر نظام السجن عبر البريفكس (تتغير أسماؤها حسب إعدادك لها):<br>
+                    • <strong>أمر السجن @منشن [السبب]:</strong> سجن عضو وإعطائه رتبة المسجون مع سحب رتبه السابقة وحفظها بالذاكرة.<br>
+                    • <strong>أمر الإفراج @منشن:</strong> فك السجن وإرجاع كافة الرتب السابقة تلقائياً للعضو.<br>
+                    • <strong>أمر المؤبد @منشن [تفعيل/ايقاف]:</strong> قفل أو فك المؤبد عن مسجون (متاح للشيبات/الإدارة العليا فقط لمنع خروجه التلقائي).<br>
+                    • <strong>أمر الاستعلام @منشن [سجل]:</strong> عرض معلومات المسجون الحالية أو سجل سجنه الكامل وقضاياه السابقة.
                 </div>
             </div>
 
             <div class="command-card">
                 <div class="command-header">
-                    <span class="command-name">🔨 +فصل</span>
+                    <span class="command-name">⛱️ [أوامر الإجازة والرجوع المخصصة]</span>
                     <span class="command-badge badge-prefix">Prefix</span>
                 </div>
                 <div class="command-desc">
-                    أمر فصل عضو وحذف رتب محددة منه حسب الإعدادات. الصيغة: <strong>+فصل @منشن [السبب]</strong>. لا يطرد العضو من السيرفر بل يحذف فقط الرتب المحددة في إعدادات النظام. يتم تسجيل العملية في روم اللوج مع تفاصيل كاملة.
+                    أوامر نظام الإجازات للموظفين بالطريقة المحددة في الإعدادات:<br>
+                    • <strong>أمر الإجازة @منشن [المدة] [السبب]:</strong> إعطاء إجازة بمدة محددة (يدعم الاختصارات الذكية مثل: <code>5d</code> أيام، <code>7w</code> أسابيع، <code>10m</code> دقائق، <code>30s</code> ثواني) مع إزالة الرتب لحمايتها وحفظها.<br>
+                    • <strong>أمر الرجوع @منشن:</strong> إنهاء إجازة العضو يدوياً فوراً وإرجاع جميع رتبه السابقة.<br>
+                    • <strong>ميزة التلقائية:</strong> ينتهي أمر الإجازة ويعيد البوت الرتب للعضو تلقائياً بمجرد انتهاء الوقت المكتوب دون تدخل إداري!
+                </div>
+            </div>
+
+            <div class="command-card">
+                <div class="command-header">
+                    <span class="command-name">🔨 [أمر الفصل المخصص]</span>
+                    <span class="command-badge badge-prefix">Prefix</span>
+                </div>
+                <div class="command-desc">
+                    أمر فصل عضو وحذف الرتب المحددة منه بناءً على آلية الفصل التي اخترتها في الإعدادات. الصيغة: <strong>الأمر المخصص @منشن [السبب]</strong>. النظام مصمم لعدم طرد العضو، بل يجرده فقط من الرتب المحددة أو الرتبة وما فوقها ويسجل تفاصيل العملية بلون اللوج المخصص.
                 </div>
             </div>
 
@@ -757,7 +713,7 @@
                     <span class="command-badge badge-prefix">Prefix</span>
                 </div>
                 <div class="command-desc">
-                    أمر استرجاع آخر رسالة سبام تم حذفها بواسطة نظام الحماية التلقائية. يظهر محتوى الرسالة المحذوفة ومرسلها وتوقيت حذفها. يمكن استخدام رقم لاستعراض رسائل أقدم: <strong>+snipe 3</strong>. لا يعمل إلا إذا كان مفعلاً من إعدادات anti-spam.
+                    أمر استرجاع آخر رسالة سبام تم حذفها بواسطة نظام الحماية التلقائية. يظهر محتوى الرسالة المحذوفة ومرسلها وتوقيت حذفها. يمكن استخدام رقم لاستعراض رسائل أقدم: <strong>+snipe 3</strong>. لا يعمل إلا إذا كان مفعلاً من إعدادات anti-spam لضمان أمان السيرفر.
                 </div>
             </div>
 
